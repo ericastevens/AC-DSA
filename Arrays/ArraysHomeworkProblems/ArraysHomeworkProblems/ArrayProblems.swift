@@ -15,7 +15,10 @@ import Foundation
 //Sample output: [1,2,3,4,5,0]
 
 func problemOne(arr: [Int]) -> [Int] {
-    return []
+    var copyArr = arr
+    let firstToLastElement = copyArr.remove(at: 0)
+    copyArr.append(firstToLastElement)
+    return copyArr
 }
 
 
@@ -26,7 +29,16 @@ func problemOne(arr: [Int]) -> [Int] {
 //Sample output: [3,4,5,0,1,2]
 
 func problemTwo(arr: [Int], x: Int) -> [Int] {
-    return []
+    var outputArr = arr
+    var upperbound = x
+    
+    repeat {
+        let firstToLastElement = outputArr.remove(at: 0)
+        outputArr.append(firstToLastElement)
+        upperbound -= 1
+    } while upperbound > 0
+    
+    return outputArr
 }
 
 //Write a function that accepts two strings, and returns true if one string is rotation of the other, taking letter case into account.
@@ -42,7 +54,36 @@ func problemTwo(arr: [Int], x: Int) -> [Int] {
 //Sample output 3: false
 
 func problemThree(strOne: String, strTwo: String) -> Bool {
-    return false
+    var testArray = [Character]()
+    var controlArray = [Character]()
+    
+    if strOne.characters.count != strTwo.characters.count {
+        return false
+    }
+    else {
+        for char in strTwo.characters{
+            testArray.append(char)
+        }
+        
+        for char1 in strOne.characters {
+            controlArray.append(char1)
+        }
+        
+        for i in 0..<controlArray.count {
+            if controlArray[i] != testArray[i] {
+                let firstToLastElement = testArray.remove(at: 0)
+                testArray.append(firstToLastElement)
+            }
+            
+        }
+        
+        if controlArray == testArray {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }
 
 
@@ -63,7 +104,20 @@ func problemThree(strOne: String, strTwo: String) -> Bool {
 //|(1 + 5 + 9) - (3 + 5 + 11)| = |15 - 19| = |-4| = 4
 
 func problemFour(arr: [[Int]]) -> Int {
-    return 0
+    var decrementingIndex = arr.count - 1
+    var descendingDiagonalTotal = 0
+    var ascendingDiagonalTotal = 0
+    var difference = 0
+    
+    for x in 0..<arr.count {
+        
+        descendingDiagonalTotal += arr[x][x]
+        ascendingDiagonalTotal += arr[x][decrementingIndex]
+        decrementingIndex -= 1
+    }
+    difference = descendingDiagonalTotal - ascendingDiagonalTotal
+    
+    return abs(difference)
 }
 
 
@@ -84,6 +138,20 @@ func problemFour(arr: [[Int]]) -> Int {
 //|(4 + 1 + 3 + 3) - (5 + 9 + 1 + 9)| = |11 - 24| = |-13| = 13
 
 func problemFive(arr: [[Int]]) -> Int {
-    return 0
+    var decrementingIndex = arr.count - 1
+    var descendingDiagonalTotal = 0
+    var ascendingDiagonalTotal = 0
+    var difference = 0
+    
+    for x in 0..<arr.count {
+        
+        descendingDiagonalTotal += arr[x][x]
+        ascendingDiagonalTotal += arr[x][decrementingIndex]
+        decrementingIndex -= 1
+    }
+    difference = descendingDiagonalTotal - ascendingDiagonalTotal
+    
+    return abs(difference)
+    
 }
 
